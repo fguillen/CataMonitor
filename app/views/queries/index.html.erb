@@ -1,0 +1,95 @@
+<div class="portlet">  
+  <div class="portlet-header">
+    <h4>Table</h4> 
+  </div> <!-- .portlet-header -->    
+  
+  <div class="portlet-content">  
+    <!-- Start Table -->
+    <table id="dataTable" cellpadding="0" cellspacing="0">        
+      <thead>
+        <tr>
+          <th width="20%">Column 1</th>
+          
+          <th width="40%">Column 2</th>
+          <th width="20%">Column 3</th>
+          <th width="20%">Column 4</th>              
+          <th></th>
+        </tr>
+      </thead>          
+      
+      <tbody>
+        <tr>
+          <td class="alt">John Doe</td>
+          <td class="alt"><a href="javascript:;">Sed non nulla elit</a></td>              
+          <td class="alt">Billing</td>
+          <td class="alt">2001</td>
+        </tr>          
+    
+        <tr>
+          <td>Mike Jones</td>
+          <td><a href="javascript:;">Phasellus euismod tincidunt enim</a></td>
+          <td>Enginerring</td>              
+          <td>1998</td>
+        </tr>
+    
+        <tr>
+          <td>Carl Adams</td>
+          <td><a href="javascript:;">Ultrices posuere cubilia Curae</a></td>
+          <td>Management</td>
+          <td>2001</td>
+        </tr>
+    
+        <tr>
+          <td>Brian Jones</td>
+          <td><a href="javascript:;">In ut ante eget ligula vehicula</a></td>
+          <td>Management</td>
+          
+          <td>1997</td>
+        </tr>
+            
+        <tr>
+          <td>Mary Jones</td>
+          <td><a href="javascript:;">Morbi elementum eros a diam malesuada</a></td>
+          <td>Sales</td>
+          
+          <td>2003</td>
+        </tr>
+    
+        <tr>
+          <td>Sarah Howard</td>
+          <td><a href="javascript:;">Lorem ipsum donec interdum</a></td>
+          <td>Accounting</td>
+          
+          <td>2005</td>
+        </tr>
+      </tbody>
+    
+    </table>
+    <!-- End Table -->                  
+  
+  </div> <!-- .portlet-content -->  
+  
+</div> <!-- .portlet -->
+
+
+<% title "Queries" %>
+
+<table>
+  <tr>
+    <th>Query</th>
+    <th>User</th>
+  </tr>
+  <% for query in @queries %>
+    <tr>
+      <td><%=h query.query %></td>
+      <td><%=h query.user_id %></td>
+      <td><%= link_to "Show", user_queries_path( @user ) %></td>
+      <td><%= link_to "Edit", edit_user_query_path( @user, query) %></td>
+      <td><%= link_to "Destroy", user_query_path( @user, query ), :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Queries", new_user_query_path( @user ) %></p>
+
+

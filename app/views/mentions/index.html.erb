@@ -1,0 +1,27 @@
+<% title "Mentions" %>
+
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Context</th>
+    <th>Pagerank</th>
+    <th>Num Followers</th>
+    <th>Register At</th>
+    <th>Query</th>
+  </tr>
+  <% for mention in @mentions %>
+    <tr>
+      <td><%=h mention.type %></td>
+      <td><%=h mention.context %></td>
+      <td><%=h mention.pagerank %></td>
+      <td><%=h mention.num_followers %></td>
+      <td><%=h mention.register_at %></td>
+      <td><%=h mention.query_id %></td>
+      <td><%= link_to "Show", mention %></td>
+      <td><%= link_to "Edit", edit_mention_path(mention) %></td>
+      <td><%= link_to "Destroy", mention, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Mention", new_mention_path %></p>

@@ -1,0 +1,16 @@
+<% title "Queries" %>
+
+<p>
+  <strong>Query:</strong>
+  <%=h @queries.query %>
+</p>
+<p>
+  <strong>User:</strong>
+  <%=h @queries.user_id %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_user_query_path( @user, @query ) %> |
+  <%= link_to "Destroy", [@user, @query], :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", user_queries_path( @user ) %>
+</p>

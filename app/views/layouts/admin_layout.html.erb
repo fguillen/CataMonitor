@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <title>CataMonitor Login</title>
+
+  <%= stylesheet_link_tag 'custom', 'blue' %>  
+  <!--[if IE 8]>  
+    <%= stylesheet_link_tag 'ie8' %>
+  <![endif]-->
+
+  <!--[if IE 7]>  
+    <%= stylesheet_link_tag 'ie7' %>
+  <![endif]-->
+</head>
+
+<body class="layout-fixed">
+  
+<div id="page">
+
+  <!-- Start #header -->
+  <div id="header">
+    
+    <div class="pad">
+      
+      <h1 id="title"><a href=""><img src="images/azure-title.png" alt="Azure Admin" /></a></h1>
+      
+      <div id="info">
+        
+        <div id="infoText">
+          Bienvenido de nuevo <a href="javascript:;"><%= current_user.name %></a>
+          <% if @query %>
+            <br />
+            Estás revisando tu query <strong>'<%= @query.query %>'</strong>.
+          <% end %>
+        </div> <!-- #infoText -->
+        
+        <div class="underlay"></div>
+      </div>
+      
+    </div> <!-- .pad -->
+    
+  </div> <!-- #header -->
+  
+  <!-- Start #nav -->
+  <div id="nav" class="clearfix">
+    
+    <ul>
+      <% if @query %>
+        <li><%= link_to 'Gráfica', chart_user_query_path( @user, @query ), :class => 'current' %></li>
+        <li><%= link_to 'Blogs', user_query_path( @user, @query, :type => 'blogs' ) %></li>
+        <li><%= link_to 'Redes Sociales', user_query_path( @user, @query, :type => 'social_nets' ) %></li>
+        <li><%= link_to 'Noticias', user_query_path( @user, @query, :type => 'news' ) %></li>
+        <li><%= link_to 'Imágenes', user_query_path( @user, @query, :type => 'images' ) %></li>
+        <li><%= link_to 'Videos', user_query_path( @user, @query, :type => 'videos' ) %></li>
+        <li><%= link_to 'Favoritos', user_query_path( @user, @query, :type => 'favorite' ) %></li>
+      <% end %>
+
+      <li style="float: right"><%= link_to 'Salir', login_path %></li>
+      <li style="float: right"><%= link_to 'Mi cuenta', user_path( @user ) %></li>
+      <li style="float: right"><%= link_to 'Mis queries', user_path( @user ) %></li>
+    </ul>
+    
+  </div> <!-- #nav -->
+  
+  <!-- Start #body -->
+  <div id="body">
+    
+    <h1 id="pageTitle">Dashboard</h1>
+    
+    <%- flash.each do |name, msg| -%>
+      <p class="message message-<%= name %>"><% msg %></p>
+    <%- end -%>
+    
+    <!-- Start #main -->
+    <div id="main">    
+  
+      <%= yield %>
+      
+    </div> <!-- #main -->    
+    
+    <!-- Start #sidebar -->
+    <div id="sidebar">
+      
+      <div class="portlet portlet-closable">  
+        
+        <div class="portlet-header">
+          <h4>Quick Info (83)</h4> 
+          
+        </div> <!-- .portlet-header -->    
+        
+        <div class="portlet-content">    
+          <p>Activity that has taken place since the last time you logged in. Vivamus pulvinar tempus orci. </p>
+          
+          <ul id="quick-info">
+            <li class="qi-orders"><a href="javascript:;">23 new orders</a></li>
+            <li class="qi-comments"><a href="javascript:;">7 new comments</a></li>
+            <li class="qi-questions"><a href="javascript:;">9 new questions</a></li>
+            <li class="qi-articles"><a href="javascript:;">3 new articles</a></li>
+            <li class="qi-messages"><a href="javascript:;">5 new messages</a></li>
+            <li class="qi-subscribers"><a href="javascript:;">36 new subscribers</a></li>
+          </ul>
+            
+          <div class="clear"></div>
+        </div> <!-- .portlet-content -->  
+      </div> <!-- .portlet -->
+      
+      
+              
+      
+      
+    </div> <!-- #sidebar -->
+
+      
+  </div> <!-- #body -->
+  
+  <!-- Start #footer -->
+  <div id="footer">
+    
+    <p>Copyright &copy; 2010, Rod Creative, all rights reserved.</p>
+    
+  </div>
+
+</div> <!-- #page -->
+
+</body>
+
+</html>

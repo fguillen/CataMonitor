@@ -1,0 +1,1 @@
+comprobar que sólo un admin o el mismo usuario puede acceder a ver y manipular su cuenta y sus queries y mentions

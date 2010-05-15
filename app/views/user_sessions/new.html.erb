@@ -1,0 +1,42 @@
+<div class="portlet-header">
+  <h4>CataMonitor Login</h4>
+</div>  
+         
+<% form_for @user_session, :url => user_session_path do |f| %>
+  <%= f.error_messages %>
+  <div class="content_front">
+    <div class="pad">
+      <div class="field">
+        <%= f.label :email %>
+        <div>
+          <span class="input">
+            <%= f.text_field :email, :id => 'login_email', :class => 'text' %>
+          </span>
+        </div>
+      </div> <!-- .field -->
+      
+      <div class="field ">
+        <%= f.label :password %>
+        <div>
+          <span class="input">
+            <%= f.password_field :password, :id => 'login_password', :class => 'text' %>
+            <!-- <a style="" href="javascript:;" id="forgot_my_password">Forgot password?</a> -->
+          </span>
+        </div>
+      </div> <!-- .field -->
+
+      <div class="checkbox">
+        <span class="label">&nbsp;</span>
+        <div>
+          <%= f.check_box :remember_me, :id => 'remember', :class => 'checkbox' %> &nbsp;
+          <%= f.label :remember_me, 'Recuérdame en este ordenador' %>
+        </div>
+      </div> <!-- .field -->
+
+      <div class="field">
+        <span class="label">&nbsp;</span>
+        <div><button><span><%= f.submit 'Login' %></span></button></div>
+      </div> <!-- .field -->
+    </div> <!-- pad -->
+  </div>
+<% end %>

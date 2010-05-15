@@ -1,0 +1,427 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head lang="en">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<title>Azure Admin Documentation</title>
+	<!-- Framework CSS -->
+	<link rel="stylesheet" href="docs/assets/blueprint-css/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="docs/assets/blueprint-css/print.css" type="text/css" media="print">
+	<!--[if lt IE 8]><link rel="stylesheet" href="docs/assets/blueprint-css/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="docs/assets/blueprint-css/plugins/fancy-type/screen.css" type="text/css" media="screen, projection">
+	<style type="text/css" media="screen">
+		p, table, hr, .box { margin-bottom:25px; }
+		.box p { margin-bottom:10px; }
+	</style>
+</head>
+
+
+<body>
+	<div class="container">
+	
+		<h3 class="center alt">&ldquo;Azure Admin&rdquo; Documentation by &ldquo;Rod Howard	&rdquo; v1.0</h3>
+		
+		<hr>
+		
+		<h1 class="center">&ldquo;Azure Admin&rdquo;</h1>
+		
+		<div class="borderTop">
+			<div class="span-6 colborder info prepend-1">
+				<p class="prepend-top">
+					<strong>
+					Created: April 26, 2010<br>
+					By: Rod Howard<br>
+					Email: <a href="mailto:support@rodcreative.com">support@rodcreative.com</a>
+					</strong>
+				</p>
+			</div><!-- end div .span-6 -->		
+	
+			<div class="span-12 last">
+				<p class="prepend-top append-0">Thank you for purchasing Azure Admin. If you have any questions that have not been answered below, feel free to shoot me a message by email at <a href="mailto:support@rodcreative.com">here</a>. Thanks again!</p>
+			</div>
+		</div><!-- end div .borderTop -->
+		
+		<hr>
+		
+		<h2 id="toc" class="alt">Table of Contents</h2>
+		<ol class="alpha">
+			<li><a href="#htmlStructure">HTML Structure</a></li>
+			<li><a href="#cssFiles">CSS Files and Structure</a></li>
+			<li><a href="#javascript">JavaScript</a></li>
+			<li><a href="#psdFiles">PSD Files</a></li>
+			<li><a href="#credits">Sources and Credits</a></li>			
+		</ol>
+		
+		<hr>
+		
+		<h3 id="htmlStructure"><strong>A) HTML Structure</strong> - <a href="#toc">top</a></h3>
+
+		
+		
+		<p><strong>Header</strong></p>
+	
+		
+		<pre>
+&lt;div id="header"&gt;
+		
+	&lt;div class="pad"&gt;
+		
+		&lt;h1 id="title"&gt;&lt;a href=""&gt;Azure&lt;/a&gt;&lt;/h1&gt;
+		
+		&lt;div id="info"&gt;
+			
+			&lt;div id="infoText"&gt;
+				Welcome back &lt;a href="javascript:;"&gt;John Roberts&lt;/a&gt; 
+				&lt;br /&gt;
+				Today is November 15, 2009 17:24 &lt;a href="javascript:;"&gt;View Website&lt;/a&gt; | 
+				&lt;a href="javascript:;"&gt;View Latest Activity&lt;/a&gt;
+			&lt;/div&gt; &lt;!-- #infoText --&gt;
+			
+			&lt;div class="underlay"&gt;&lt;/div&gt;
+		&lt;/div&gt;
+		
+	&lt;/div&gt; &lt;!-- .pad --&gt;
+	
+&lt;/div&gt; &lt;!-- #header --&gt;
+		</pre>
+		
+		<p>To change the website title, modify H1#title.</p>
+		<p>To change the info message and links, modify div#info.</p>
+		
+		
+		
+		<hr />
+		
+		<p><strong>Navigation</strong></p>
+		
+		
+		<pre>
+&lt;li&gt;
+	&lt;a href="javascript:;"&gt;Orders&lt;/a&gt;
+								
+	&lt;div class="sub_nav one_col"&gt;	
+		&lt;div class="col"&gt;		
+			
+			&lt;h3&gt;Help Links&lt;/h3&gt;
+				
+			&lt;ul&gt;
+				&lt;li&gt;&lt;a href="javascript:;"&gt;Section #1&lt;/a&gt;&lt;/li&gt;
+				&lt;li&gt;&lt;a href="javascript:;"&gt;Section #2&lt;/a&gt;&lt;/li&gt;
+				&lt;li&gt;&lt;a href="javascript:;"&gt;Section #3&lt;/a&gt;&lt;/li&gt;
+				&lt;li&gt;&lt;a href="javascript:;"&gt;Section #4&lt;/a&gt;&lt;/li&gt;
+			&lt;/ul&gt;					
+		&lt;/div&gt;&lt;!-- .col --&gt;
+	&lt;/div&gt;&lt;!-- .sub_nav --&gt;								
+&lt;/li&gt;
+		</pre>
+		
+		<p>To create a new main navigation link, an LI tag containing desired hyperlink.</p>
+		
+		<p>To create a sub menu within a navigation link, add a div with the class .sub_nav. Inside of the div.sub_nav you may add up to 3 columns of content by adding a div with the class .col for each column you need.</p>
+
+		<p>To customize the content of the column, modify the text in the div.col</p>
+		
+		
+		<hr />
+		
+		<p><strong>Portlets</strong></p>
+		<p>All the content is contained in blocks with the following structure:</p>
+		
+		<pre>
+&lt;div class="portlet portlet-closable"&gt;	
+	&lt;div class="portlet-header"&gt;
+		&lt;h4&gt;Tabs&lt;/h4&gt;
+		
+		&lt;ul class="portlet-tab-nav"&gt;
+			&lt;li class="portlet-tab-nav-active"&gt;&lt;a href="#tab1"&gt;Tab 1&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="#tab2"&gt;Tab 2&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="#tab3"&gt;Tab 3&lt;/a&gt;&lt;/li&gt;
+		&lt;/ul&gt;
+		
+		&lt;span class="portlet-toggle-icon"&gt;&lt;/span&gt;
+	&lt;/div&gt; &lt;!-- .portlet-header --&gt;	
+	
+	&lt;div class="portlet-content"&gt;			
+		&lt;div id="tab1" class="portlet-tab-content"&gt;
+			&lt;strong&gt;Tab #1&lt;/strong&gt;			
+			&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.&lt;/p&gt;
+		&lt;/div&gt; &lt;!-- .portlet-tab-content --&gt;
+		
+		&lt;div id="tab2" class="portlet-tab-content"&gt;
+			&lt;strong&gt;Tab #2&lt;/strong&gt;			
+			&lt;p&gt;Vivamus ac tortor dolor. Donec commodo, dui id ultrices blandit. &lt;/p&gt;
+		&lt;/div&gt; &lt;!-- .portlet-tab-content --&gt;
+		
+		&lt;div id="tab3" class="portlet-tab-content"&gt;
+			&lt;strong&gt;Tab #3&lt;/strong&gt;			
+			&lt;p&gt;Vivamus ac tortor dolor. Donec commodo, dui id ultrices blandit. &lt;/p&gt;
+		&lt;/div&gt; &lt;!-- .portlet-tab-content --&gt;
+	&lt;/div&gt; &lt;!-- .portlet-content --&gt;	
+&lt;/div&gt; &lt;!-- .portlet --&gt;
+		</pre>
+		
+		<p>To modify the portlet title, change the H4 text in .portlet-header</p>
+		
+		<p>To make a portlet closable, add the class .portlet-closable to the div where you added the class .portlet</p>
+		
+		<p>To create a closed portlet when the page loads, add the class .portlet-state-closed to the same div as .portlet-closable. WARNING: Adding this class to a portlet that is not made closable will hide the content of the portlet permanently.</p>
+		
+		<p>The portlet toggle icon automatically adds itself when a portlet is made closeable using .portlet-closable</p>
+		
+		<p>To change the information within a portlet, modify the contents of .portlet-content</p>
+		
+		<p>To create portlet tabs, add an unordered list with the class .portlet-tab-nav into div.portlet-header. For each tab, the HREF attribute on the anchor tag should be the ID of the DIV containing its content.</p>
+		
+		<p>To activate a tab upon page load, add the class .portlet-tab-nav-active to the LI tag of the tab you want opened.
+		
+		<p>To create a tab's content (ex. Tab 1), add a div with the class .portlet-tab-content and a unique ID attribute (ex. id="tab1"). IMPORTANT: The id of this .portlet-tab-content must match the id of the anchor tag.</p>	
+		
+		<p>IMPORTANT: When working with portlet tabs, it is important that all content reside within a div with the class .portlet-tab-content. Any content outside of these will always be visible.</p>
+		
+		<p>Portlets added within div#main will have the header color of the active theme. Portlets added within div#sidebar will have a grey header color.</p>
+		
+		<hr />		
+		
+		
+		<p><strong>Forms</strong></p>
+		
+		
+
+		
+		<pre>
+&lt;form class="form label-top" action="" method="get" accept-charset="utf-8"&gt;
+		</pre>
+		
+		<p>All styled forms need to have the class .form</p>
+		
+		<p>To create a form with the labels on top of the fields, add the class .label-top to the form tag. The default for forms is labels to the left of fields and no classes are necessary for this to work.</p>
+				
+		<pre>
+&lt;div class="field"&gt;
+	&lt;label for="subject"&gt;Subject&lt;/label&gt;
+	&lt;input type="text" name="subject" value="" id="subject" class="medium" /&gt;				
+	&lt;span class="field_help"&gt;This is the help text for the field&lt;/span&gt;
+	&lt;span class="field_error"&gt;This field is invalid&lt;/span&gt;
+&lt;/div&gt; &lt;!-- .field --&gt;
+		</pre>
+		
+		
+
+		<p>Specify the label position using the class .label-top to create labels that are on top of the fields. Use the class .label-inline to create labels that are to the left of the fields. These two classes go on the main form tag.</p>
+
+		<p>Input elements can contain the classes .small, .medium, .large to specify the size of the an input field.</p>
+		
+		<p>Specify field help text by adding SPAN.help_text</p>
+		
+		<hr />		
+		
+		
+		<p><strong>Messages</strong></p>
+		
+		<p>There are 4 styles of messages - Information, Warning, Success and Error. Their structure is as follows:</p>
+		
+		<pre>
+&lt;p class="message message-warning "&gt;Warning Message&lt;/p&gt;
+&lt;p class="message message-success "&gt;Success Message&lt;/p&gt;
+&lt;p class="message message-info message-closable"&gt;Informative Message&lt;/p&gt;
+&lt;p class="message message-error message-closable"&gt;Error Message&lt;/p&gt;
+		</pre>
+		
+		<p>All notification messages must contain the class .message</p>
+		
+		<p>To create a closable message, add the class .message-closable</p>
+		
+		
+		<hr />		
+		
+		
+		<p><strong>Buttons</strong></p>
+		
+		
+		
+		<pre>
+&lt;button class="btn-pri"&gt;&lt;span&gt;Submit&lt;/span&gt;&lt;/button&gt;
+
+&lt;button class="btn-sec"&gt;&lt;span&gt;Submit&lt;/span&gt;&lt;/button&gt;
+		</pre>
+		
+		<p>To create a primary action button, add the class .btn-pri. This button will be the main color of the selected theme.</p>
+		
+		<p>To create a secondary action button, add the class .btn-sec. This button will be grey.</p>
+		
+		<hr />
+		
+		
+		
+
+		<p><strong>Layouts</strong></p>
+		
+				
+		<pre>
+&lt;body class="layout-fixed"&gt;	
+
+&lt;body class="layout-fluid"&gt;
+</pre>
+		
+		<p>To change the layout to fluid, add the class .layout-fluid to the body tag. The fixed layout is the default layout, so adding the class .layout-fixed to the body tag is optional.</p>
+		
+		
+		
+		<hr />
+		
+		
+	
+
+		<p><strong>Quick Info</strong></p>
+		
+				
+		<pre>
+&lt;ul id="quick-info"&gt;
+	&lt;li class="qi-orders"&gt;&lt;a href="javascript:;"&gt;23 new orders&lt;/a&gt;&lt;/li&gt;
+	&lt;li class="qi-comments"&gt;&lt;a href="javascript:;"&gt;7 new comments&lt;/a&gt;&lt;/li&gt;
+	&lt;li class="qi-questions"&gt;&lt;a href="javascript:;"&gt;9 new questions&lt;/a&gt;&lt;/li&gt;
+	&lt;li class="qi-articles"&gt;&lt;a href="javascript:;"&gt;3 new articles&lt;/a&gt;&lt;/li&gt;
+	&lt;li class="qi-messages"&gt;&lt;a href="javascript:;"&gt;5 new messages&lt;/a&gt;&lt;/li&gt;
+	&lt;li class="qi-subscribers"&gt;&lt;a href="javascript:;"&gt;36 new subscribers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+		
+		<p>To modify or add a quick info item, create a custom class prefixed with qi- followed by a unique name for an item (ex. qi-orders).</p>
+<pre>
+.qi-orders a { background-image: url(../images/money.png) !important; }
+</pre>		
+		<p>To add the icon for an item, create a css class and modify the background with the icon of your choosing. IMPORTANT: The icons should be 16px by 16px</p>
+		
+		<hr />
+		
+		
+		
+		
+		
+<p><strong>Gallery</strong></p>
+		
+				
+		<pre>
+&lt;div id="gallery"&gt;	
+	&lt;a href="./images/lightbox/image1.jpg"&gt;&lt;img src="./images/lightbox/thumb_image1.jpg" alt="Lightbox Image" /&gt;&lt;/a&gt;
+	&lt;a href="./images/lightbox/image2.jpg"&gt;&lt;img src="./images/lightbox/thumb_image2.jpg" alt="Lightbox Image"  /&gt;&lt;/a&gt;
+	&lt;a href="./images/lightbox/image3.jpg"&gt;&lt;img src="./images/lightbox/thumb_image3.jpg" alt="Lightbox Image"  /&gt;&lt;/a&gt;
+	&lt;a href="./images/lightbox/image4.jpg"&gt;&lt;img src="./images/lightbox/thumb_image4.jpg" alt="Lightbox Image"  /&gt;&lt;/a&gt;
+	&lt;a href="./images/lightbox/image1.jpg"&gt;&lt;img src="./images/lightbox/thumb_image1.jpg" alt="Lightbox Image"  /&gt;&lt;/a&gt;
+	&lt;a href="./images/lightbox/image5.jpg"&gt;&lt;img src="./images/lightbox/thumb_image5.jpg" alt="Lightbox Image"  /&gt;&lt;/a&gt;
+&lt;/div&gt; &lt;!-- #gallery --&gt;
+</pre>
+
+		
+		<p>To add more lightbox images, create a new anchor tag containing an image tag like above. The HREF attribute of the anchor tag should point to the large image. The image tag SRC attribute should point to the thumbnail image. </p>
+		
+		<hr />
+
+		
+		
+
+
+		<h3 id="cssFiles"><strong>B) CSS Files and Structure</strong> - <a href="#toc">top</a></h3>
+
+		<p>The css file is broken down into groups that all have headings describing which part of the site they style. The outline for the stylesheet is below.</p> 
+		<ol>
+			<li><strong>custom.css</strong> - main design styles</li>
+			<li><strong>ie7.css</strong> - overrides specific to Internet Explorer 7</li>
+			<li><strong>ie8.css</strong> - overrides specific to Internet Explorer 8</li>
+		</ol>
+		
+		<p><strong>Themes</strong></p>
+		
+		<p>To enable a specific color style remove the alternate declaration from the LINK tag for that color. Remove any colors you do not wish to use.</p>
+		
+		<ol>	
+			<li><strong>red.css</strong> - overrides styles in custom.css for red theme</li>
+			<li><strong>blue.css</strong> - overrides styles in custom.css for blue theme</li>
+			<li><strong>purple.css</strong> - overrides styles in custom.css for purple theme</li>
+			<li><strong>green.css</strong> - overrides styles in custom.css for green theme</li>
+			<li><strong>black.css</strong> - overrides styles in custom.css for black theme</li>
+			<li><strong>orange.css</strong> - overrides styles in custom.css for orange theme</li>
+		</ol>
+		
+		
+				
+		<hr>
+		
+		<h3 id="javascript"><strong>C) JavaScript</strong> - <a href="#toc">top</a></h3>
+		
+		<p>The template uses jQuery for enhancements and effects. You should find these files in the /js/ folder:</p>
+		
+		<ol>
+			<li><strong>jquery.1.4.2.min.js</strong> - is the main jQuery file</li>
+			<li><strong>jquery.flot.min.js</strong> - plugin that handles the charting</li>
+			<li><strong>jquery.cookie.js</strong> - plugin that handles cookie functionality</li>
+			<li><strong>jquery.hoverIntent.min.js</strong> - plugin that delays the hover event on elements</li>
+			<li><strong>jquery.styletoggle.js</strong> - handles theme color switching</li>
+			<li><strong>jquery.lightbox-0.5.min.js</strong> - plugin adds image lightbox functionality</li>
+			<li><strong>jquery.tablesorter.min.js</strong> - plugin that add sorting capabilities to data tables</li>
+			<li><strong>excanvas.js</strong> - plugin that adds canvas support to Internet Explorer</li>
+		</ol>
+		
+		<ol>
+			<li><strong>azure.js</strong> - selects and manages correct theme and layout on page load </li>
+			<li><strong>azure.chart.js</strong> - the code and datapoints used to create the chart and handles the chart redrawing</li>
+			<li><strong>azure.nav.js</strong> - handles the mega dropdown menus</li>
+			<li><strong>azure.message.js</strong> - handles site notifications such as warning messages, success messages, etc.</li>
+			<li><strong>azure.portlet.js</strong> - handles portlet functions</li>
+			<li><strong>azure.styleswitch.js</strong> - handles the enabling/disabling of themes</li>
+		</ol>
+		
+	
+		<hr>
+	
+
+
+	
+		
+		
+		<h3 id="psdFiles"><strong>D) PSD Files</strong> - <a href="#toc">top</a></h3>
+		
+		<p>In the /psds folder, you can find three .psd files:</p>
+				
+		<ol>
+			<li><strong>header.psd</strong> - contains the editable files for the header and navigation elements</li>
+			<li><strong>portlet-header.psd</strong> - containts the editable files for the portlets</li>
+			<li><strong>arrow-up.psd</strong> - defines the up arrows that are used in the portlets</li>
+			<li><strong>arrow-down.psd</strong> - defines the down arrows that are used in the navigation and portlets</li>
+		</ol>
+		
+		
+
+		
+		<hr>
+
+		<h3 id="credits"><strong>E) Credits</strong> - <a href="#toc">top</a></h3>
+
+		
+		<p><strong>Javascript</strong></p>
+		<ol>			
+			<li><strong>Jquery 1.4</strong> - http://jquery.com/</li>
+			<li><strong>Flot</strong> - http://code.google.com/p/flot/</li>
+			<li><strong>Cookie</strong> - http://plugins.jquery.com/project/cookie</li>
+			<li><strong>Hover Intent</strong> - http://cherne.net/brian/resources/jquery.hoverIntent.html</li>
+			<li><strong>Table Sorter</strong> - http://tablesorter.com/docs/</li>
+			<li><strong>Lightbox</strong> - http://leandrovieira.com/projects/jquery/lightbox/</li>
+			<li><strong>Stylesheet Switcher</strong> - http://www.kelvinluck.com/assets/jquery/styleswitch/toggle.html</li>
+			<li><strong>Explorer Canvas</strong> - http://code.google.com/p/explorercanvas/</li>
+		</ol>
+		
+		<p><strong>Icons</strong></p>
+		
+		<ol>
+			<li><strong>FamFamFam Silk Icons</strong> - http://famfamfam.com/lab/icons/silk/ &nbsp;&nbsp;&nbsp;(only the icons used in this theme are included)</li>
+		</ol>
+		<hr />
+		
+		<p>Again, thank you so much for purchasing this theme. As I stated at the beginning, I'd be more than happy to help should any questions arise relating to this theme. No promises, but I'll do my best to help you in any way I can. Should you have a more general inquiries relating to the themes on ThemeForest, you might consider visiting the forums and asking your question in the "Item Discussion" section.</p> 
+		
+		<p class="append-bottom alt large"><strong>Rod Howard</strong></p>
+		<p><a href="#toc">Go To Table of Contents</a></p>
+		
+		<hr class="space">
+	</div><!-- end div .container -->
+</body>
+</html>

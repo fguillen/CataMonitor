@@ -1,0 +1,9 @@
+log/*.log
+tmp
+config/database.yml
+db/schema.rb
+db/*.sqlite3
+public/javascripts/all.js
+public/stylesheets/all.css
+public/paperclip
+#config/app_config.yml
