@@ -1,9 +1,23 @@
-<h1>Edit My Account</h1>
+<div class="portlet">          
+  
+  <div class="portlet-header">
+    <h4>Edit User</h4>
+  </div> <!-- .portlet-header -->  
+    
+  <div class="portlet-content">        
+    <div id="ontop-form" class="portlet-tab-content">
+      <% form_for @user, :html => {:class => 'form label-top'} do |f| %>
+        <%= f.error_messages %>
+        
+        <%= render :partial => "form", :object => f %>
+        
+        <div class="field">
+          <span class="label">&nbsp;</span>
+          <div><button><span><%= f.submit 'Update User' %></span></button></div>
+        </div> <!-- .field -->
 
-<% form_for @user, :url => account_path do |f| %>
-  <%= f.error_messages %>
-  <%= render :partial => "form", :object => f %>
-  <%= f.submit "Update" %>
-<% end %>
+      <% end %>
+    </div> <!-- #ontop-form -->
+  </div> <!-- .portlet-content -->  
+</div> <!-- .portlet -->
 
-<br /><%= link_to "My Profile", account_path %>

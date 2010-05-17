@@ -49,19 +49,19 @@
   <div id="nav" class="clearfix">
     
     <ul>
-      <% if @query %>
+      <% if @query && !@query.new_record? %>
         <li><%= link_to 'Gráfica', chart_user_query_path( @user, @query ), :class => 'current' %></li>
-        <li><%= link_to 'Blogs', user_query_path( @user, @query, :type => 'blogs' ) %></li>
-        <li><%= link_to 'Redes Sociales', user_query_path( @user, @query, :type => 'social_nets' ) %></li>
-        <li><%= link_to 'Noticias', user_query_path( @user, @query, :type => 'news' ) %></li>
-        <li><%= link_to 'Imágenes', user_query_path( @user, @query, :type => 'images' ) %></li>
-        <li><%= link_to 'Videos', user_query_path( @user, @query, :type => 'videos' ) %></li>
-        <li><%= link_to 'Favoritos', user_query_path( @user, @query, :type => 'favorite' ) %></li>
+        <li><%= link_to 'Blogs', user_query_mentions_by_type_path( @user, @query, 'blogs' ) %></li>
+        <li><%= link_to 'Redes Sociales', user_query_mentions_by_type_path( @user, @query, 'social_nets' ) %></li>
+        <li><%= link_to 'Noticias', user_query_mentions_by_type_path( @user, @query, 'news' ) %></li>
+        <li><%= link_to 'Imágenes', user_query_mentions_by_type_path( @user, @query, 'images' ) %></li>
+        <li><%= link_to 'Videos', user_query_mentions_by_type_path( @user, @query, 'videos' ) %></li>
+        <li><%= link_to 'Favoritos', user_query_mentions_by_type_path( @user, @query, 'favorite' ) %></li>
       <% end %>
 
-      <li style="float: right"><%= link_to 'Salir', login_path %></li>
-      <li style="float: right"><%= link_to 'Mi cuenta', user_path( @user ) %></li>
-      <li style="float: right"><%= link_to 'Mis queries', user_path( @user ) %></li>
+      <li style="float: right"><%= link_to 'Salir', logout_path %></li>
+      <li style="float: right"><%= link_to 'Mi cuenta', user_path( current_user ) %></li>
+      <li style="float: right"><%= link_to 'Mis queries', user_queries_path( current_user ) %></li>
     </ul>
     
   </div> <!-- #nav -->
@@ -72,7 +72,7 @@
     <h1 id="pageTitle">Dashboard</h1>
     
     <%- flash.each do |name, msg| -%>
-      <p class="message message-<%= name %>"><% msg %></p>
+      <p class="message message-<%= name %>"><%= msg %></p>
     <%- end -%>
     
     <!-- Start #main -->

@@ -1,6 +1,10 @@
 <div class="portlet-header">
   <h4>CataMonitor Login</h4>
 </div>  
+
+<%- flash.each do |name, msg| -%>
+  <p class="message message-<%= name %>"><%= msg %></p>
+<%- end -%>
          
 <% form_for @user_session, :url => user_session_path do |f| %>
   <%= f.error_messages %>

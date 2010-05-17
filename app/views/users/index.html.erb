@@ -8,7 +8,7 @@
     <table id="dataTable" cellpadding="0" cellspacing="0">        
       <thead>
         <tr>
-          <th width="40%">Query</th>
+          <th width="40%">Name</th>
           <th width="20%">Show</th>
           <th width="20%">Edit</th>
           <th width="20%">Destroy</th>              
@@ -17,12 +17,12 @@
       </thead>          
       
       <tbody>
-        <% @queries.each do |query| %>
+        <% @users.each do |user| %>
         <tr>
-          <td class="alt"><%= link_to query.query, [@user, query] %></td>
-          <td class="alt"><%= link_to "Show", [@user, query] %></td>              
-          <td class="alt"><%= link_to "Edit", edit_user_query_path( @user, query) %></td>
-          <td class="alt"><%= link_to "Destroy", [@user, query], :confirm => 'Are you sure?', :method => :delete %></td>
+          <td class="alt"><%= link_to user.name, user %></td>
+          <td class="alt"><%= link_to "Show", user %></td>              
+          <td class="alt"><%= link_to "Edit", edit_user_path( user ) %></td>
+          <td class="alt"><%= link_to "Destroy", user, :confirm => 'Are you sure?', :method => :delete %></td>
         </tr>          
         <% end %>
  
@@ -36,6 +36,6 @@
 </div> <!-- .portlet -->
 
 
-<p><%= link_to "New Query", new_user_query_path( @user ) %></p>
+<p><%= link_to "New User", new_user_path %></p>
 
 

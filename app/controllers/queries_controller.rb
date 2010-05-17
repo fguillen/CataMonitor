@@ -1,47 +1,49 @@
 class QueriesController < ApplicationController
   before_filter :charge_user
-  before_filter :charge_query, :only => [:show, :new, :edit, :update, :destroy, :chart]
+  before_filter :charge_query, :only => [:show, :edit, :update, :destroy, :chart]
   def index
     @queries = @user.queries.all
   end
   
   def show
-    @queries = Queries.find(params[:id])
+    @query = @user.queries.find(params[:id])
   end
   
   def new
-    @queries = Queries.new
+    @query = @user.queries.new
   end
   
   def create
-    @queries = Queries.new(params[:queries])
-    if @queries.save
-      flash[:notice] = "Successfully created queries."
-      redirect_to @queries
+    @query = @user.queries.new(params[:query])
+    if @query.save
+      flash[:notice] = "Successfully created query."
+      redirect_to [@user, @query]
     else
+      flash[:alert] = "Error creating query."
       render :action => 'new'
     end
   end
   
   def edit
-    @queries = Queries.find(params[:id])
+    @query = @user.queries.find(params[:id])
   end
   
   def update
-    @queries = Queries.find(params[:id])
-    if @queries.update_attributes(params[:queries])
-      flash[:notice] = "Successfully updated queries."
-      redirect_to @queries
+    @query = @user.queries.find(params[:id])
+    if @query.update_attributes(params[:query])
+      flash[:notice] = "Successfully updated query."
+      redirect_to [@user, @query]
     else
+      flash[:alert] = "Error updating query."
       render :action => 'edit'
     end
   end
   
   def destroy
-    @queries = Queries.find(params[:id])
-    @queries.destroy
+    @query = @user.queries.find(params[:id])
+    @query.destroy
     flash[:notice] = "Successfully destroyed queries."
-    redirect_to queries_url
+    redirect_to user_queries_path( @user )
   end
   
   def chart
@@ -51,6 +53,5 @@ class QueriesController < ApplicationController
   private
     def charge_query
       @query = Query.find(params[:id])
-      
     end
 end

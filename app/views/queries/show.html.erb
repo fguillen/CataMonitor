@@ -2,12 +2,9 @@
 
 <p>
   <strong>Query:</strong>
-  <%=h @queries.query %>
+  <%=h @query.query %>
 </p>
-<p>
-  <strong>User:</strong>
-  <%=h @queries.user_id %>
-</p>
+
 
 <p>
   <%= link_to "Edit", edit_user_query_path( @user, @query ) %> |

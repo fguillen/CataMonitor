@@ -4,5 +4,7 @@ class User < ActiveRecord::Base
   end
   
   has_many :queries
+  validates_presence_of :contract_plan
+  validates_presence_of :name
   
 end

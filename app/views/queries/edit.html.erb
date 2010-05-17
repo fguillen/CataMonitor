@@ -3,6 +3,6 @@
 <%= render :partial => 'form' %>
 
 <p>
-  <%= link_to "Show", @queries %> |
-  <%= link_to "View All", queries_path %>
+  <%= link_to "Show", [@user, @query] %> |
+  <%= link_to "View All", user_queries_path( @user ) %>
 </p>

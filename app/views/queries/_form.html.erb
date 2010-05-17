@@ -1,14 +1,18 @@
-<div class="portlet portlet-closable">          
+<div class="portlet">          
   
   <div class="portlet-header">
-    <h4>Form</h4>
+    <h4>Query</h4>
   </div> <!-- .portlet-header -->  
     
   <div class="portlet-content">        
-    <div id="ontop-form" class="portlet-tab-content hide">
-      <form action="#" method="post" class="form label-top">
-        <div class="field"><label for="address12">Query</label> <input id="address12" size="50" type="text" class="large"  /></div>
+    <div id="ontop-form" class="portlet-tab-content">
+      <% form_for [@user, @query], :html => {:class => 'form label-top'} do |f| %>
+        <%= f.error_messages %>
         <div class="field">
+          <%= f.label :query %>
+          <%= f.text_field :query, :class => 'medium' %>
+        </div>
+        <!-- <div class="field">
           <label for="type">Type </label>
           <select id="type" class="medium">
             <optgroup label="Type of Whatever">
@@ -16,26 +20,15 @@
               <option>Individual</option>
             </optgroup>
           </select>
-        </div>
+        </div> -->
+        
+        <div class="field">
+          <span class="label">&nbsp;</span>
+          <div><button><span><%= f.submit 'New Query' %></span></button></div>
+        </div> <!-- .field -->
 
-        <div class="buttonrow">
-          <button><span>Nueva Query</span></button>
-        </div>
-      </form>
+      <% end %>
     </div> <!-- #ontop-form -->
   </div> <!-- .portlet-content -->  
 </div> <!-- .portlet -->
 
-
-<% form_for [@user, @query] do |f| %>
-  <%= f.error_messages %>
-  <p>
-    <%= f.label :query %><br />
-    <%= f.text_field :query %>
-  </p>
-  <p>
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %>
-  </p>
-  <p><%= f.submit "Submit" %></p>
-<% end %>

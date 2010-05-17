@@ -16,48 +16,60 @@ class QueriesControllerTest < ActionController::TestCase
   end
   
   def test_show
-    get :show, :id => Queries.first
+    query = Factory(:query, :user => @user)
+    get :show, :user_id => @user.id, :id => query.id
     assert_template 'show'
+    assert_match( query.query, @response.body )
   end
   
   def test_new
-    get :new
+    get :new, :user_id => @user.id
     assert_template 'new'
   end
   
   def test_create_invalid
-    Queries.any_instance.stubs(:valid?).returns(false)
-    post :create
+    Query.any_instance.stubs(:valid?).returns(false)
+    post :create, :user_id => @user.id
     assert_template 'new'
+    assert_not_nil( flash[:alert] )
   end
   
-  def test_create_valid
-    Queries.any_instance.stubs(:valid?).returns(true)
-    post :create
-    assert_redirected_to queries_url(assigns(:queries))
+  def test_create
+    assert_difference "Query.count", 1 do
+      post :create, :user_id => @user.id, :query => { :query => 'the query' }      
+    end
+
+    assert_redirected_to user_query_url( @user, assigns(:query) )
+    assert_equal( 'the query', Query.last.query )
   end
   
   def test_edit
-    get :edit, :id => Queries.first
+    query = Factory(:query, :user => @user)
+    get :edit, :user_id => @user.id, :id => query.id
     assert_template 'edit'
   end
   
   def test_update_invalid
-    Queries.any_instance.stubs(:valid?).returns(false)
-    put :update, :id => Queries.first
+    query = Factory(:query, :user => @user)
+    Query.any_instance.stubs(:valid?).returns(false)
+    put :update, :user_id => @user.id, :id => query.id
     assert_template 'edit'
+    assert_not_nil( flash[:alert] )
   end
   
   def test_update_valid
-    Queries.any_instance.stubs(:valid?).returns(true)
-    put :update, :id => Queries.first
-    assert_redirected_to queries_url(assigns(:queries))
+    query = Factory(:query, :user => @user, :query => 'old query')
+    Query.any_instance.stubs(:valid?).returns(true)
+    put :update, :user_id => @user.id, :id => query.id, :query => { :query => 'new query' }
+    assert_redirected_to user_query_url( @user, query )
+    query.reload
+    assert_equal( 'new query', query.query )
   end
   
   def test_destroy
-    queries = Queries.first
-    delete :destroy, :id => queries
-    assert_redirected_to queries_url
-    assert !Queries.exists?(queries.id)
+    query = Factory(:query, :user => @user)
+    delete :destroy, :user_id => @user.id, :id => query.id
+    assert_redirected_to user_queries_url( @user )
+    assert !Query.exists?(query.id)
   end
 end

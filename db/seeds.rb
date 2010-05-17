@@ -5,3 +5,10 @@
 #   
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
+
+user = Factory(:user, :password => 'wadus', :password_confirmation => 'wadus')
+
+puts "User Created:"
+puts "-------"
+puts "Email: #{user.email}"
+puts "Password: wadus"

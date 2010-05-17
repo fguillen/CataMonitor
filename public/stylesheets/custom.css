@@ -509,7 +509,7 @@ button.btn-sec span { background-position: left -100px !important; }
       
         .portlet-tab-nav li a:hover { text-decoration: underline; }
               
-    .portlet-tab-content { display: none; }
+    .portlet-tab-content { /*display: none;*/ }
     
     .portlet-tab-nav-active
     {
