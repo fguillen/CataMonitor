@@ -7,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users do |user|
     user.resources :queries, :member => [:chart] do |query|
       query.mentions_by_type 'mentions_by_type/:type', :controller => 'mentions', :action => 'by_type'
-      query.resources :mentions, :only => [:index, :show]
+      query.resources :mentions, :only => [:index]
     end
   end
 

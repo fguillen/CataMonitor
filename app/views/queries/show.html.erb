@@ -1,10 +1,17 @@
 <% title "Queries" %>
 
-<p>
-  <strong>Query:</strong>
-  <%=h @query.query %>
-</p>
-
+<div class="portlet">  
+  <div class="portlet-header">
+    <h4>Query</h4> 
+  </div> <!-- .portlet-header -->    
+  
+  <div class="portlet-content">
+    <p>
+      <strong>Query:</strong>
+      <%=h @query.query %>
+    </p>
+  </div>
+</div>
 
 <p>
   <%= link_to "Edit", edit_user_query_path( @user, @query ) %> |

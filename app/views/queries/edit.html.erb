@@ -1,6 +1,18 @@
 <% title "Edit Queries" %>
 
-<%= render :partial => 'form' %>
+<div class="portlet">          
+  
+  <div class="portlet-header">
+    <h4>Edit Query</h4>
+  </div> <!-- .portlet-header -->  
+    
+  <div class="portlet-content">        
+    <div id="ontop-form" class="portlet-tab-content">
+      <%= render :partial => 'form' %>
+    </div>
+  </div>
+</div>
+  
 
 <p>
   <%= link_to "Show", [@user, @query] %> |

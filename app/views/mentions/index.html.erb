@@ -1,27 +1,36 @@
 <% title "Mentions" %>
 
-<table>
-  <tr>
-    <th>Type</th>
-    <th>Context</th>
-    <th>Pagerank</th>
-    <th>Num Followers</th>
-    <th>Register At</th>
-    <th>Query</th>
-  </tr>
-  <% for mention in @mentions %>
-    <tr>
-      <td><%=h mention.type %></td>
-      <td><%=h mention.context %></td>
-      <td><%=h mention.pagerank %></td>
-      <td><%=h mention.num_followers %></td>
-      <td><%=h mention.register_at %></td>
-      <td><%=h mention.query_id %></td>
-      <td><%= link_to "Show", mention %></td>
-      <td><%= link_to "Edit", edit_mention_path(mention) %></td>
-      <td><%= link_to "Destroy", mention, :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
-  <% end %>
-</table>
-
-<p><%= link_to "New Mention", new_mention_path %></p>
+<div class="portlet">  
+  <div class="portlet-header">
+    <h4>Mentions by type <%= params[:type].capitalize %></h4>  
+  </div> <!-- .portlet-header -->  
+  
+  <div class="portlet-content">
+    <% @mentions.each do |mention| %>
+    <div class="mention" id="mention-<%= mention.id %>">
+      <div class="mention-favicon">
+        <%= image_tag mention.m_favicon, :height => '16px', :width => '16px' %>
+      </div>
+      <div class="mention-body">
+        <h3><%= link_to mention.m_title, mention.m_link, :target => '_blank' %></h3>
+        <% if !mention.m_description.blank? %>
+          <div class="mention-description"><%= mention.m_description %></div>
+        <% end %>
+        <div class="mention-footer">
+          <p>
+            <%= link_to mention.m_link, mention.m_link, :target => '_blank' %>
+            <br />
+            <% if !mention.m_timestamp.nil? %>
+              on <%= mention.m_timestamp.strftime( "%Y-%m-%d %H:%M:%s" ) %>
+            <% else %>
+              fecha desconocida
+            <% end %>
+            - by <%= link_to mention.m_user, mention.m_user_link %> 
+            on <%= link_to mention.m_source, "http://#{mention.m_domain}" %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

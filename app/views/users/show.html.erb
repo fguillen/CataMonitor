@@ -1,17 +1,26 @@
-<p>
-  <b>Name:</b>
-  <%=h @user.name %>
-</p>
 
-<p>
-  <b>Email:</b>
-  <%=h @user.email %>
-</p>
+<div class="portlet">  
+  <div class="portlet-header">
+    <h4>User</h4>  
+  </div> <!-- .portlet-header -->  
+  
+  <div class="portlet-content">
+    
+    <p>
+      <b>Name:</b>
+      <%=h @user.name %>
+    </p>
 
-<p>
-  <b>Contract Plan:</b>
-  <%=h @user.contract_plan %>
-</p>
+    <p>
+      <b>Email:</b>
+      <%=h @user.email %>
+    </p>
 
+    <p>
+      <b>Contract Plan:</b>
+      <%=h @user.contract_plan %>
+    </p>
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_user_path( @user ) %>

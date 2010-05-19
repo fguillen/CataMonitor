@@ -7,7 +7,7 @@
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   <title>CataMonitor Login</title>
 
-  <%= stylesheet_link_tag 'custom', 'blue' %>  
+  <%= stylesheet_link_tag 'custom', 'blue', 'my_style' %>  
   <!--[if IE 8]>  
     <%= stylesheet_link_tag 'ie8' %>
   <![endif]-->
@@ -26,7 +26,7 @@
     
     <div class="pad">
       
-      <h1 id="title"><a href=""><img src="images/azure-title.png" alt="Azure Admin" /></a></h1>
+      <h1 id="title"><%= link_to 'CataMonitor Admin', root_path %></h1>
       
       <div id="info">
         
@@ -50,13 +50,13 @@
     
     <ul>
       <% if @query && !@query.new_record? %>
-        <li><%= link_to 'Gráfica', chart_user_query_path( @user, @query ), :class => 'current' %></li>
-        <li><%= link_to 'Blogs', user_query_mentions_by_type_path( @user, @query, 'blogs' ) %></li>
-        <li><%= link_to 'Redes Sociales', user_query_mentions_by_type_path( @user, @query, 'social_nets' ) %></li>
-        <li><%= link_to 'Noticias', user_query_mentions_by_type_path( @user, @query, 'news' ) %></li>
-        <li><%= link_to 'Imágenes', user_query_mentions_by_type_path( @user, @query, 'images' ) %></li>
-        <li><%= link_to 'Videos', user_query_mentions_by_type_path( @user, @query, 'videos' ) %></li>
-        <li><%= link_to 'Favoritos', user_query_mentions_by_type_path( @user, @query, 'favorite' ) %></li>
+      
+        <li><%= link_to 'Gráfica', chart_user_query_path( @user, @query ), :class => (params[:action] == 'chart' ? 'current' : '') %></li>
+        
+        <% %w(blogs microblogs bookmarks comments events images news videos audio questions networks).each do |mention_type| %>
+          <li><%= link_to mention_type.capitalize, user_query_mentions_by_type_path( @user, @query, mention_type ), :class => (params[:type] == mention_type ? 'current' : '') %></li>
+        <% end %>
+        
       <% end %>
 
       <li style="float: right"><%= link_to 'Salir', logout_path %></li>
@@ -84,34 +84,25 @@
     
     <!-- Start #sidebar -->
     <div id="sidebar">
-      
-      <div class="portlet portlet-closable">  
+      <% if @query && !@query.new_record? %>
+        <div class="portlet">  
+          <div class="portlet-header">
+            <h4>Query Mentions (<%= @query.mentions.count %>)</h4> 
+          </div> <!-- .portlet-header -->    
         
-        <div class="portlet-header">
-          <h4>Quick Info (83)</h4> 
+          <div class="portlet-content">    
+            <p>Small pieces of info. </p>
           
-        </div> <!-- .portlet-header -->    
-        
-        <div class="portlet-content">    
-          <p>Activity that has taken place since the last time you logged in. Vivamus pulvinar tempus orci. </p>
-          
-          <ul id="quick-info">
-            <li class="qi-orders"><a href="javascript:;">23 new orders</a></li>
-            <li class="qi-comments"><a href="javascript:;">7 new comments</a></li>
-            <li class="qi-questions"><a href="javascript:;">9 new questions</a></li>
-            <li class="qi-articles"><a href="javascript:;">3 new articles</a></li>
-            <li class="qi-messages"><a href="javascript:;">5 new messages</a></li>
-            <li class="qi-subscribers"><a href="javascript:;">36 new subscribers</a></li>
-          </ul>
+            <ul id="quick-info">
+              <% %w(blogs microblogs bookmarks comments events images news videos audio questions networks).each do |mention_type| %>
+                <li class="qi-articles"><%= link_to "#{@query.mentions.by_type( mention_type ).count} #{mention_type.capitalize}", user_query_mentions_by_type_path( @user, @query, mention_type ) %></li>
+              <% end %>
+            </ul>
             
-          <div class="clear"></div>
-        </div> <!-- .portlet-content -->  
-      </div> <!-- .portlet -->
-      
-      
-              
-      
-      
+            <div class="clear"></div>
+          </div> <!-- .portlet-content -->  
+        </div> <!-- .portlet -->
+      <% end %>
     </div> <!-- #sidebar -->
 
       
@@ -120,7 +111,7 @@
   <!-- Start #footer -->
   <div id="footer">
     
-    <p>Copyright &copy; 2010, Rod Creative, all rights reserved.</p>
+    <p>Copyright &copy; 2010, CataMonitor, all rights reserved.</p>
     
   </div>
 

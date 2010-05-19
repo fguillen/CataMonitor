@@ -1,5 +1,15 @@
-<% title "New Queries" %>
-
-<%= render :partial => 'form' %>
+<% title "New Query" %>
+<div class="portlet">          
+  
+  <div class="portlet-header">
+    <h4>New Query</h4>
+  </div> <!-- .portlet-header -->  
+    
+  <div class="portlet-content">        
+    <div id="ontop-form" class="portlet-tab-content">
+      <%= render :partial => 'form' %>
+    </div>
+  </div>
+</div>
 
 <p><%= link_to "Back to List", user_queries_path( @user ) %></p>
