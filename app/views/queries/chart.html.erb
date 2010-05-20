@@ -1,9 +1,45 @@
+<%= javascript_include_tag 'flot/jquery.flot.js' %>
+
 <div class="portlet">  
   <div class="portlet-header">
-    <h4>Chart</h4>  
+    <h4>Chart</h4>
+    <div id="query-chart"></div>
   </div> <!-- .portlet-header -->  
   
   <div class="portlet-content">        
     <div id="placeholder" style="width:100%; height:300px;"></div>
   </div> <!-- .portlet-content -->  
 </div> <!-- .portlet -->
+
+<script id="source" language="javascript" type="text/javascript">
+$(function () {
+    
+    
+    <%# %w(blogs microblogs bookmarks comments events images news videos audio questions networks).each do |mention_type| %>
+      var blogs = []
+      <% (0..29).each do |days_ago| %>
+        blogs.push( [<%= days_ago.days.ago.to_i * 1000 %>, <%= @query.mentions.by_date( days_ago.days.ago ) %>] );
+      <% end %>
+    <%# end %>
+
+    
+    var d1 = [];
+    for (var i = 0; i < 14; i += 0.5)
+        d1.push([i, Math.sin(i)]);
+
+    var d2 = [[new Date().getTime(), 3], [new Date().getTime(), 8], [new Date().getTime(), 5], [new Date().getTime(), 13]];
+
+    // a null signifies separate line segments
+    var d3 = [[0, 12], [7, 12], null, [7, 2.5], [12, 2.5]];
+    
+    var options = { xaxis: { mode: "time", timeformat: "%y/%m/%d" } };
+    
+    $.plot(
+      $("#query-chart"), 
+      [ 
+        {label: 'Blogs', data: blogs}
+      ],
+      options
+    );
+});
+</script>

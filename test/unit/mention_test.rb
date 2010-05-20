@@ -13,4 +13,13 @@ class MentionTest < ActiveSupport::TestCase
     
     assert_equal( [mention_blog_1, mention_blog_2], query.mentions.by_type( 'blog' ) )
   end
+  
+  def test_by_date
+    query = Factory(:query)
+    mention_20100101_1 = Factory(:mention, :query => query, :register_at => Time.parse('2010-01-01 10:10:10') )
+    mention_20100101_2 = Factory(:mention, :query => query, :register_at => Time.parse('2010-01-01 12:10:10') )
+    mention_20100102 = Factory(:mention, :query => query, :register_at => Time.parse('2010-01-02 12:10:10') )
+    
+    assert_equal( [mention_20100101_1, mention_20100101_2], query.mentions.by_date( Time.parse('2010-01-01') ) )
+  end
 end

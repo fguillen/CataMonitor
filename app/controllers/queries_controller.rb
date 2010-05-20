@@ -50,6 +50,13 @@ class QueriesController < ApplicationController
     
   end
   
+  def process_mentions
+    @query = @user.queries.find(params[:id])
+    mentions = CataMonitor::QueriesProcessor.process_query( @query )
+    flash[:notice] = "Query procesada, encontradas #{mentions.size} nuevas menciones."
+    redirect_to user_query_mentions_by_type_path( @user, @query, 'blogs' )
+  end
+  
   private
     def charge_query
       @query = Query.find(params[:id])

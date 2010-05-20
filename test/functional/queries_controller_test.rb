@@ -72,4 +72,17 @@ class QueriesControllerTest < ActionController::TestCase
     assert_redirected_to user_queries_url( @user )
     assert !Query.exists?(query.id)
   end
+  
+  def test_process_mentions
+    query = Factory(:query, :user => @user)
+    json = File.read( "#{RAILS_ROOT}/test/fixtures/social_mention_jquery_all.json" )
+    CataMonitor::QueriesProcessor.expects(:http_get).returns( json )
+    
+    assert_difference "Mention.count", 878 do
+      get(:process_mentions, :user_id => @user.id, :id => query.id)  
+    end
+    
+    assert_not_nil( flash[:notice] )
+    assert_redirected_to user_query_mentions_by_type_path( @user, query, 'blogs' )
+  end
 end

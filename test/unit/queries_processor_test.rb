@@ -46,11 +46,14 @@ class QueriesProcessorTest < ActiveSupport::TestCase
     assert_equal( 'http://army.twit.tv/terryh', mention.m_user_link )
   end
 
-  def test_digest_process
+  def test_process_all
     query = Factory(:query)
     json = File.read( "#{RAILS_ROOT}/test/fixtures/social_mention_jquery_all.json" )
+    
+    CataMonitor::QueriesProcessor.expects(:http_get).returns( json )
+
     assert_difference "Mention.count", 878 do
-      CataMonitor::QueriesProcessor.digest_json( query, json )
+      CataMonitor::QueriesProcessor.process_all
     end
     
     mention = Mention.find_by_m_id( '5375012168050394442' )
@@ -71,4 +74,35 @@ class QueriesProcessorTest < ActiveSupport::TestCase
     assert_equal( nil, mention.m_user_image )
     assert_equal( 'http://friendfeed.com/galaxark', mention.m_user_link )
   end
+  
+  def test_process_query
+    query = Factory(:query)
+    json = File.read( "#{RAILS_ROOT}/test/fixtures/social_mention_jquery_all.json" )
+    
+    CataMonitor::QueriesProcessor.expects(:http_get).returns( json )
+
+    assert_difference "Mention.count", 878 do
+      CataMonitor::QueriesProcessor.process_query( query )
+    end
+    
+    mention = Mention.find_by_m_id( '5375012168050394442' )
+    assert_equal( '', mention.m_description )
+    assert_equal( 'stumbleupon.com', mention.m_domain )
+    assert_equal( nil, mention.m_embed )
+    assert_equal( 'http://stumbleupon.com/favicon.ico', mention.m_favicon )
+    assert_equal( '5375012168050394442', mention.m_id )
+    assert_equal( nil, mention.m_image )
+    assert_equal( 'en', mention.m_language )
+    assert_equal( 'http://twitter.com/galaxark/statuses/14214883381', mention.m_link )
+    assert_equal( 'stumbleupon', mention.m_source )
+    assert_equal( '201005180807', mention.m_timestamp.strftime( "%Y%m%d%H%M" ) )
+    assert_equal( 'JQuery Scrolling Effect for Designers http://bit.ly/91CHRU', mention.m_title )
+    assert_equal( 'bookmarks', mention.m_type )
+    assert_equal( 'galaxark', mention.m_user )
+    assert_equal( nil, mention.m_user_id )
+    assert_equal( nil, mention.m_user_image )
+    assert_equal( 'http://friendfeed.com/galaxark', mention.m_user_link )
+  end
+  
+  
 end

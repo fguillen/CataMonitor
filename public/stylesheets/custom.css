@@ -71,9 +71,8 @@ pre,code      { margin: 1.5em 0; white-space: pre }
 pre,code,tt   { font: 12px 'andale mono', 'monotype.com', 'lucida console', monospace; line-height: 1.5 } 
 tt             { display: block; margin: 1.5em 0; line-height: 1.5 }
 
-table { width: 100%; font-size: 11px; border: 0; }
-
-   table thead th
+table.portlet-table { width: 100%; font-size: 11px; border: 0; }
+table.portlet-table thead th
    {
      
     font-weight: bold;
@@ -82,16 +81,13 @@ table { width: 100%; font-size: 11px; border: 0; }
     border-bottom: 1px solid #E5E2E2;
   }    
   
-  th.header { background: url(/images/tables/sorter-bg.gif) no-repeat 0% 50% !important; padding-left: 20px !important; cursor: pointer; }
+th.header { background: url(/images/tables/sorter-bg.gif) no-repeat 0% 50% !important; padding-left: 20px !important; cursor: pointer; }  
+th.headerSortDown { background-image: url(/images/tables/sorter-desc.gif) !important; }   
+th.headerSortUp { background-image: url(/images/tables/sorter-asc.gif) !important; }
   
-  th.headerSortDown { background-image: url(/images/tables/sorter-desc.gif) !important; } 
-  
-  th.headerSortUp { background-image: url(/images/tables/sorter-asc.gif) !important; }
-  
-       table tbody tr td { background: #FFF; }
-    
-      table thead th,
-      table tbody tr td { padding: 10px; }
+table.portlet-table tbody tr td { background: #FFF; }    
+table.portlet-table thead th,
+table.portlet-table tbody tr td { padding: 10px; }
 
 button { 
   position: relative;

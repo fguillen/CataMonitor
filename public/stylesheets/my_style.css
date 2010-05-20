@@ -32,3 +32,9 @@ line-height: 14px;
 .mention .mention-footer{
 margin-top: 5px;
 }
+
+#query-chart{
+margin-top: 30px;
+  width:600px;
+  height:400px;
+}
