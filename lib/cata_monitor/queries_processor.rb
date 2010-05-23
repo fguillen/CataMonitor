@@ -30,7 +30,7 @@ module CataMonitor
         end
 
         # only add if not already registered
-        if( !Mention.exists?( :m_id => item['id'] ) )
+        if( !query.mentions.exists?( :m_id => item['id'] ) )
           mention =
             Mention.create!(
               :query_id => query.id,
