@@ -50,10 +50,20 @@ module CataMonitor
               :m_user_id => item['user_id'],
               :m_user_image => item['user_image'],
               :m_user_link => item['user_link'],
-              :register_at => Time.now,
-              :pagerank => SEO::GooglePR.request(item['link']),
-              :postrank => SEO::PostRank.request(item['link'])
+              :register_at => Time.now
             )
+            
+          begin
+            mention.update_attribute( :pagerank, SEO::GooglePR.request(item['link']) )
+          rescue Exception => e
+            puts "ERROR calculating PageRank for: '#{item['link']}', e: #{e.message}"
+          end
+          
+          begin
+            mention.update_attribute( :postrank, SEO::PostRank.request(item['link']) )
+          rescue Exception => e
+            puts "ERROR calculating PostRank for: '#{item['link']}', e: #{e.message}"
+          end
           
           mentions << mention
         end
