@@ -18,7 +18,8 @@ class CreateMentions < ActiveRecord::Migration
       t.string :m_user_image
       t.string :m_user_link
  
-      t.integer :pagerank
+      t.float :pagerank
+      t.float :postrank
       t.integer :num_followers
       t.datetime :register_at
       t.integer :query_id

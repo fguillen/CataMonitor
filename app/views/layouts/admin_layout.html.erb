@@ -5,7 +5,7 @@
 
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-  <title>CataMonitor Login</title>
+  <title>CataMonitor Admin</title>
   <%= javascript_include_tag 'jquery' %>
 
   <%= stylesheet_link_tag 'custom', 'blue', 'my_style' %>  
@@ -32,10 +32,14 @@
       <div id="info">
         
         <div id="infoText">
-          Bienvenido de nuevo <a href="javascript:;"><%= current_user.name %></a>
-          <% if @query %>
-            <br />
-            Estás revisando tu query <strong>'<%= @query.query %>'</strong>.
+          <% if current_user %>
+            Bienvenido de nuevo <a href="javascript:;"><%= current_user.name %></a>
+            <% if @query %>
+              <br />
+              Estás revisando tu query <strong>'<%= @query.query %>'</strong>
+              <br />
+              Con un rango de <strong><%= params[:num_days] %> días</strong>.
+            <% end %>
           <% end %>
         </div> <!-- #infoText -->
         
@@ -51,18 +55,19 @@
     
     <ul>
       <% if @query && !@query.new_record? %>
-      
-        <li><%= link_to 'Gráfica', chart_user_query_path( @user, @query ), :class => (params[:action] == 'chart' ? 'current' : '') %></li>
+        <li><%= link_to 'Gráfica', user_query_mentions_chart_path( @user, @query, params[:num_days] ), :class => (params[:action] == 'chart' ? 'current' : '') %></li>
         
         <% %w(blogs microblogs bookmarks comments events images news videos audio questions networks).each do |mention_type| %>
-          <li><%= link_to mention_type.capitalize, user_query_mentions_by_type_path( @user, @query, mention_type ), :class => (params[:type] == mention_type ? 'current' : '') %></li>
+          <li><%= link_to mention_type.capitalize, user_query_mentions_by_type_path( @user, @query, mention_type, params[:num_days] ), :class => (params[:type] == mention_type ? 'current' : '') %></li>
         <% end %>
         
       <% end %>
 
-      <li style="float: right"><%= link_to 'Salir', logout_path %></li>
-      <li style="float: right"><%= link_to 'Mi cuenta', user_path( current_user ) %></li>
-      <li style="float: right"><%= link_to 'Mis queries', user_queries_path( current_user ) %></li>
+      <% if current_user %>
+        <li style="float: right"><%= link_to 'Salir', logout_path %></li>
+        <li style="float: right"><%= link_to 'Mi cuenta', user_path( current_user ) %></li>
+        <li style="float: right"><%= link_to 'Mis queries', user_queries_path( current_user ) %></li>
+      <% end %>
     </ul>
     
   </div> <!-- #nav -->
@@ -88,7 +93,7 @@
       <% if @query && !@query.new_record? %>
         <div class="portlet">  
           <div class="portlet-header">
-            <h4>Query Mentions (<%= @query.mentions.count %>)</h4> 
+            <h4>Query Mentions (<%= @query.mentions.between_dates( Time.now - params[:num_days].to_i.days, Time.now ).count %>)</h4> 
           </div> <!-- .portlet-header -->    
         
           <div class="portlet-content">    
@@ -96,7 +101,7 @@
           
             <ul id="quick-info">
               <% %w(blogs microblogs bookmarks comments events images news videos audio questions networks).each do |mention_type| %>
-                <li class="qi-articles"><%= link_to "#{@query.mentions.by_type( mention_type ).count} #{mention_type.capitalize}", user_query_mentions_by_type_path( @user, @query, mention_type ) %></li>
+                <li class="qi-articles"><%= link_to "#{@query.mentions.by_type( mention_type ).between_dates( Time.now - params[:num_days].to_i.days, Time.now ).count} #{mention_type.capitalize}", user_query_mentions_by_type_path( @user, @query, mention_type, params[:num_days] ) %></li>
               <% end %>
             </ul>
             

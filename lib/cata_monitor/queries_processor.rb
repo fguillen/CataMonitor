@@ -9,7 +9,7 @@ module CataMonitor
     def self.process_query( query )
       params = {:q => query.query, :f => 'json', :t => 'all'}
       result = CataMonitor::QueriesProcessor.http_get( 'api2.socialmention.com', '/search', params )
-      File.open( "#{RAILS_ROOT}/test/fixtures/social_mention_query_#{query.query.parameterize}_#{Time.now.strftime("%Y%m%d%H%M%S")}.json", 'w') { |f| f.write result }      
+      # File.open( "#{RAILS_ROOT}/test/fixtures/social_mention_query_#{query.query.parameterize}_#{Time.now.strftime("%Y%m%d%H%M%S")}.json", 'w') { |f| f.write result }      
       mentions = CataMonitor::QueriesProcessor.digest_json( query, result )        
       puts "XXX: mentions created for '#{query.query}': #{mentions.size}"
       
@@ -28,30 +28,35 @@ module CataMonitor
         if( item['timestamp'].kind_of?(Numeric) && item['timestamp'] > 3000 )
           timestamp = Time.at(item['timestamp'])
         end
-        
-        mention =
-          Mention.create!(
-            :query_id => query.id,
-            :m_description => item['description'],
-            :m_domain => item['domain'],
-            :m_embed => item['embed'],
-            :m_favicon => item['favicon'],
-            :m_id => item['id'],
-            :m_image => item['image'],
-            :m_language => item['language'],
-            :m_link => item['link'],
-            :m_source => item['source'],
-            :m_timestamp => timestamp,
-            :m_title => item['title'],
-            :m_type => item['type'],
-            :m_user => item['user'],
-            :m_user_id => item['user_id'],
-            :m_user_image => item['user_image'],
-            :m_user_link => item['user_link'],
-            :register_at => Time.now
-          )
+
+        # only add if not already registered
+        if( !Mention.exists?( :m_id => item['id'] ) )
+          mention =
+            Mention.create!(
+              :query_id => query.id,
+              :m_description => item['description'],
+              :m_domain => item['domain'],
+              :m_embed => item['embed'],
+              :m_favicon => item['favicon'],
+              :m_id => item['id'],
+              :m_image => item['image'],
+              :m_language => item['language'],
+              :m_link => item['link'],
+              :m_source => item['source'],
+              :m_timestamp => timestamp,
+              :m_title => item['title'],
+              :m_type => item['type'],
+              :m_user => item['user'],
+              :m_user_id => item['user_id'],
+              :m_user_image => item['user_image'],
+              :m_user_link => item['user_link'],
+              :register_at => Time.now,
+              :pagerank => SEO::GooglePR.request(item['link']),
+              :postrank => SEO::PostRank.request(item['link'])
+            )
           
-        mentions << mention
+          mentions << mention
+        end
       end
       
       return mentions

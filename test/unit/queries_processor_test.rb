@@ -1,7 +1,13 @@
 require 'test_helper'
 
 class QueriesProcessorTest < ActiveSupport::TestCase
+
+  
   def test_digest_json_iphone
+    SEO::GooglePR.stubs( :request ).returns( 2 )
+    SEO::PostRank.stubs( :request ).returns( 1 )
+    
+    
     query = Factory(:query)
     json = File.read( "#{RAILS_ROOT}/test/fixtures/social_mention_iphone_blogs_microblogs.json" )
     assert_difference "Mention.count", 672 do
@@ -25,6 +31,8 @@ class QueriesProcessorTest < ActiveSupport::TestCase
     assert_equal( '2354498', mention.m_user_id )
     assert_equal( 'http://a3.twimg.com/profile_images/869254845/twitter_normal.png', mention.m_user_image )
     assert_equal( 'http://twitter.com/ajaimk', mention.m_user_link )
+    assert_equal( 2.0, mention.pagerank )
+    assert_equal( 1.0, mention.postrank )
 
       
     mention = Mention.find_by_m_id( '6084506213657997802' )
@@ -44,9 +52,14 @@ class QueriesProcessorTest < ActiveSupport::TestCase
     assert_equal( '412', mention.m_user_id )
     assert_equal( 'http://army.twit.tv/avatar/412-48-20100405104921.png', mention.m_user_image )
     assert_equal( 'http://army.twit.tv/terryh', mention.m_user_link )
+    assert_equal( 2.0, mention.pagerank )
+    assert_equal( 1.0, mention.postrank )
   end
 
   def test_process_all
+    SEO::GooglePR.stubs( :request ).returns( 2 )
+    SEO::PostRank.stubs( :request ).returns( 1 )
+    
     query = Factory(:query)
     json = File.read( "#{RAILS_ROOT}/test/fixtures/social_mention_jquery_all.json" )
     
@@ -76,6 +89,9 @@ class QueriesProcessorTest < ActiveSupport::TestCase
   end
   
   def test_process_query
+    SEO::GooglePR.stubs( :request ).returns( 2 )
+    SEO::PostRank.stubs( :request ).returns( 1 )
+    
     query = Factory(:query)
     json = File.read( "#{RAILS_ROOT}/test/fixtures/social_mention_jquery_all.json" )
     
@@ -102,6 +118,24 @@ class QueriesProcessorTest < ActiveSupport::TestCase
     assert_equal( nil, mention.m_user_id )
     assert_equal( nil, mention.m_user_image )
     assert_equal( 'http://friendfeed.com/galaxark', mention.m_user_link )
+  end
+  
+  def test_process_query_not_register_already_registered_mentions
+    SEO::GooglePR.stubs( :request ).returns( 2 )
+    SEO::PostRank.stubs( :request ).returns( 1 )
+    
+    query = Factory(:query)
+    json = File.read( "#{RAILS_ROOT}/test/fixtures/only_one.json" )
+    
+    CataMonitor::QueriesProcessor.expects(:http_get).returns( json ).twice
+
+    assert_difference "Mention.count", 1 do
+      CataMonitor::QueriesProcessor.process_query( query )
+    end
+    
+    assert_difference "Mention.count", 0 do
+      CataMonitor::QueriesProcessor.process_query( query )
+    end
   end
   
   

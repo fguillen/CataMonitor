@@ -34,7 +34,13 @@ margin-top: 5px;
 }
 
 #query-chart{
-margin-top: 30px;
+  margin-top: 30px;
+  width:600px;
+  height:400px;
+}
+
+#query-pie{
+  margin-top: 30px;
   width:600px;
   height:400px;
 }

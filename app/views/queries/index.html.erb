@@ -9,10 +9,10 @@
       <thead>
         <tr>
           <th width="40%">Query</th>
-          <th width="15%">Show</th>
-          <th width="15%">Edit</th>
-          <th width="15%">Destroy</th>     
-          <th width="15%">Process</th>          
+          <th width="30%">Rango</th>
+          <th width="10%">Edit</th>
+          <th width="10%">Destroy</th>     
+          <th width="10%">Process</th>          
           <th></th>
         </tr>
       </thead>          
@@ -20,8 +20,11 @@
       <tbody>
         <% @queries.each do |query| %>
         <tr>
-          <td class="alt"><%= link_to query.query, [@user, query] %></td>
-          <td class="alt"><%= link_to "Show", [@user, query] %></td>              
+          <td class="alt"><%= link_to query.query, user_query_mentions_chart_path( @user, query ) %></td>
+          <td class="alt">
+            <%= link_to "30 días",  user_query_mentions_chart_path( @user, query, 30 ) %>
+            <%= link_to "7 días",  user_query_mentions_chart_path( @user, query, 7 ) %>
+          </td>              
           <td class="alt"><%= link_to "Edit", edit_user_query_path( @user, query ) %></td>
           <td class="alt"><%= link_to "Destroy", [@user, query], :confirm => 'Are you sure?', :method => :delete %></td>
           <td class="alt"><%= link_to "Process", process_mentions_user_query_path( @user, query ) %></td>

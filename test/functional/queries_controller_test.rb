@@ -74,6 +74,9 @@ class QueriesControllerTest < ActionController::TestCase
   end
   
   def test_process_mentions
+    SEO::GooglePR.stubs( :request ).returns( 2 )
+    SEO::PostRank.stubs( :request ).returns( 1 )
+    
     query = Factory(:query, :user => @user)
     json = File.read( "#{RAILS_ROOT}/test/fixtures/social_mention_jquery_all.json" )
     CataMonitor::QueriesProcessor.expects(:http_get).returns( json )
@@ -83,6 +86,6 @@ class QueriesControllerTest < ActionController::TestCase
     end
     
     assert_not_nil( flash[:notice] )
-    assert_redirected_to user_query_mentions_by_type_path( @user, query, 'blogs' )
+    assert_redirected_to user_query_mentions_chart_path( @user, query )
   end
 end

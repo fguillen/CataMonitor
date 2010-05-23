@@ -14,9 +14,9 @@ puts "Email: #{user.email}"
 puts "Password: wadus"
 
 
-puts "Creating Query"
-query = Factory(:query, :user => user)
-
-puts "Creating Mentions"
-mention_types = %w(blogs microblogs bookmarks comments events images news videos audio questions networks)
-100.times { Factory(:mention, :query => query, :m_type => mention_types[rand(mention_types.size)]) }
+# puts "Creating Query"
+# query = Factory(:query, :user => user)
+# 
+# puts "Creating Mentions"
+# mention_types = %w(blogs microblogs bookmarks comments events images news videos audio questions networks)
+# 100.times { Factory(:mention, :query => query, :m_type => mention_types[rand(mention_types.size)]) }

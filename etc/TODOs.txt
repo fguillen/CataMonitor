@@ -1,3 +1,7 @@
 comprobar que sólo un admin o el mismo usuario puede acceder a ver y manipular su cuenta y sus queries y mentions
 user bussiness role on user creation and editing
 mention.timestamp desde socialmention
+Cual es la fecha a tener en cuenta: la fecha de registro o el timestamp que muchas veces no está bien puesto?
+PostRank en un proceso unificado
+PageRank en un proceso unificado
+API keys for SocialMention and PostRank

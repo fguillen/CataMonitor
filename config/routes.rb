@@ -5,8 +5,9 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'  
   
   map.resources :users do |user|
-    user.resources :queries, :member => [:chart, :process_mentions] do |query|
-      query.mentions_by_type 'mentions_by_type/:type', :controller => 'mentions', :action => 'by_type'
+    user.resources :queries, :member => [:process_mentions] do |query|
+      query.mentions_by_type 'mentions_by_type/:type/days/:num_days', :controller => 'mentions', :action => 'by_type', :num_days => '30'
+      query.mentions_chart 'mentions_chart/days/:num_days', :controller => 'mentions', :action => 'chart', :num_days => '30'
       query.resources :mentions, :only => [:index]
     end
   end
