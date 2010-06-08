@@ -7,10 +7,14 @@ module CataMonitor
     end
     
     def self.process_query( query )
-      params = {:q => query.query, :f => 'json', :t => 'all'}
-      result = CataMonitor::QueriesProcessor.http_get( 'api2.socialmention.com', '/search', params )
-      # File.open( "#{RAILS_ROOT}/test/fixtures/social_mention_query_#{query.query.parameterize}_#{Time.now.strftime("%Y%m%d%H%M%S")}.json", 'w') { |f| f.write result }      
-      mentions = CataMonitor::QueriesProcessor.digest_json( query, result )        
+      mentions = []
+      ['', 'es', 'en'].each do |lang|
+        params = {:q => query.query, :f => 'json', :t => 'all', :lang => lang}
+        result = CataMonitor::QueriesProcessor.http_get( 'api2.socialmention.com', '/search', params )
+        # File.open( "#{RAILS_ROOT}/test/fixtures/social_mention_query_#{query.query.parameterize}_#{Time.now.strftime("%Y%m%d%H%M%S")}.json", 'w') { |f| f.write result }      
+        mentions.concat CataMonitor::QueriesProcessor.digest_json( query, result )        
+      end
+        
       puts "XXX: mentions created for '#{query.query}': #{mentions.size}"
       
       return mentions

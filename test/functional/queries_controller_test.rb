@@ -79,7 +79,7 @@ class QueriesControllerTest < ActionController::TestCase
     
     query = Factory(:query, :user => @user)
     json = File.read( "#{RAILS_ROOT}/test/fixtures/social_mention_jquery_all.json" )
-    CataMonitor::QueriesProcessor.expects(:http_get).returns( json )
+    CataMonitor::QueriesProcessor.expects(:http_get).returns( json ).times(3)
     
     assert_difference "Mention.count", 878 do
       get(:process_mentions, :user_id => @user.id, :id => query.id)  

@@ -63,7 +63,7 @@ class QueriesProcessorTest < ActiveSupport::TestCase
     query = Factory(:query)
     json = File.read( "#{RAILS_ROOT}/test/fixtures/social_mention_jquery_all.json" )
     
-    CataMonitor::QueriesProcessor.expects(:http_get).returns( json )
+    CataMonitor::QueriesProcessor.expects(:http_get).returns( json ).times(3)
 
     assert_difference "Mention.count", 878 do
       CataMonitor::QueriesProcessor.process_all
@@ -95,7 +95,7 @@ class QueriesProcessorTest < ActiveSupport::TestCase
     query = Factory(:query)
     json = File.read( "#{RAILS_ROOT}/test/fixtures/social_mention_jquery_all.json" )
     
-    CataMonitor::QueriesProcessor.expects(:http_get).returns( json )
+    CataMonitor::QueriesProcessor.expects(:http_get).returns( json ).times(3)
 
     assert_difference "Mention.count", 878 do
       CataMonitor::QueriesProcessor.process_query( query )
@@ -127,7 +127,7 @@ class QueriesProcessorTest < ActiveSupport::TestCase
     query = Factory(:query)
     json = File.read( "#{RAILS_ROOT}/test/fixtures/only_one.json" )
     
-    CataMonitor::QueriesProcessor.expects(:http_get).returns( json ).twice
+    CataMonitor::QueriesProcessor.expects(:http_get).returns( json ).times(6)
 
     assert_difference "Mention.count", 1 do
       CataMonitor::QueriesProcessor.process_query( query )
@@ -137,6 +137,7 @@ class QueriesProcessorTest < ActiveSupport::TestCase
       CataMonitor::QueriesProcessor.process_query( query )
     end
   end
+
   
   
 end

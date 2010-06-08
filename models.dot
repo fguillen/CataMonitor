@@ -1,0 +1,8 @@
+digraph models_diagram {
+	graph[overlap=false, splines=true]
+	"Mention" [shape=Mrecord, label="{Mention|m_description :string\lm_domain :string\lm_embed :text\lm_favicon :string\lm_image :string\lm_language :string\lm_link :string\lm_source :string\lm_timestamp :datetime\lm_title :string\lm_type :string\lm_user :string\lm_user_image :string\lm_user_link :string\lpagerank :float\lpostrank :float\lnum_followers :integer\lregister_at :datetime\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"Query" [shape=Mrecord, label="{Query|query :string\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"User" [shape=Mrecord, label="{User|contract_plan :string\lname :string\lemail :string\lcrypted_password :string\lpassword_salt :string\lpersistence_token :string\lsingle_access_token :string\lperishable_token :string\llast_request_at :datetime\lcurrent_login_at :datetime\llast_login_at :datetime\lcurrent_login_ip :string\llast_login_ip :string\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"Query" -> "Mention" [arrowtail=crow, arrowhead=dot, dir=both]
+	"User" -> "Query" [arrowtail=crow, arrowhead=dot, dir=both]
+}
